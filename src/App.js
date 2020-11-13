@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import "./style.css";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -8,7 +9,7 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API}&q=London`
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API}&q=Beijing`
       )
       .then((data) => {
         setWeather(data.data);
@@ -34,14 +35,13 @@ function App() {
           `${data.data.location.name}'s weather is presented for you!`
         );
       })
-
       .catch((err) => {
         console.log(err);
       });
   };
 
   return (
-    <div>
+    <div className="app">
       <h1>Weather App</h1>
       <div className="search">
         <input onChange={handleInput} type="text" value={input} />
@@ -53,13 +53,11 @@ function App() {
             <img src={weather.current.condition.icon} alt="" />
           </div>
           <div className="info">
-            <h1>CITY: {weather.location.name}</h1>
-            <h2>REIGION: {weather.location.region}</h2>
-            <h3>LOCALTIME: {weather.location.localtime}</h3>
-            <h4>
-              It is {weather.current.temp_c} but it feels like{" "}
-              {weather.current.feelslike_c}, why...?
-            </h4>
+            <h2>Temperature: {weather.current.temp_c} ℃</h2>
+            <h3>Feels like: {weather.current.feelslike_c} ℃</h3>
+            <h2>City: {weather.location.name}</h2>
+            <h2>Country: {weather.location.country}</h2>
+            <h2>Local Time: {weather.location.localtime}</h2>
           </div>
         </>
       )}
