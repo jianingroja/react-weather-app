@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Weather App</h1>
+      <h1>Weather Now</h1>
       <div className="search">
         <input onChange={handleInput} type="text" value={input} />
         <button onClick={handleSearch}>Search</button>
